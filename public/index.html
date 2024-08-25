@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FCM Test</title>
+  <link rel="manifest" href="manifest.json">
+  <!-- Include Alertify CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+  <!-- Include Alertify theme (optional) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+  <!-- Include Alertify JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-messaging.js";
+    
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDNp8jIFQuVEgTz0_FQwAK9R77VuGp8T54",
+      authDomain: "fcm-ui-d2d96.firebaseapp.com",
+      projectId: "fcm-ui-d2d96",
+      storageBucket: "fcm-ui-d2d96.appspot.com",
+      messagingSenderId: "142896678357",
+      appId: "1:142896678357:web:09895b33ec7dfc04fea95c",
+      measurementId: "G-5H9E7PD3V5"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Initialize Firebase Messaging
+    const messaging = getMessaging(app);
+
+    // Request permission to receive notifications
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.');
+        // Get the registration token
+        getToken(messaging, { vapidKey: 'BLnDdBG8yA_LsQA4qyuu7staFMs7VuEE-Vga4Z2v0uM7VOWBXbTzDO5FACntxBLERknTMH7LUVKUFm8FkQfj69w' }).then((currentToken) => {
+          if (currentToken) {
+            console.log('FCM Token:', currentToken);
+            // Send the token to your backend for registration
+          } else {
+            console.log('No registration token available. Request permission to generate one.');
+          }
+        }).catch((err) => {
+          console.error('An error occurred while retrieving token. ', err);
+        });
+      } else {
+        console.log('Unable to get permission to notify.');
+      }
+    });
+
+    // Handle incoming messages
+    onMessage(messaging, (payload) => {
+      console.log('Message received. ', payload);
+      // Display notification or handle the message as needed
+      const title = payload.data.title;
+      const options = {
+          body: payload.data.body,
+          // icon: payload.data.icon,
+          // image: payload.data.image,
+          // data: {
+          //     time: new Date(Date.now()).toString(),
+          //     click_action: '/'
+          // }
+      };
+      showNotification("tst", {body: "test"});
+    });
+    
+    // Display a notification on the webpage
+function showNotification(title, options) {
+    if (Notification.permission === 'granted') {
+      alertify.notify('This is a basic notification!', 'success', 5, function(){ console.log('dismissed'); });
+    } else {
+      console.log('Notification permission not granted.');
+    }
+  }
+  </script>
+</head>
+<body>
+  <h1>FCM Test</h1>
+  <p>Check the console for FCM token and messages.</p>
+</body>
+</html>

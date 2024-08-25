@@ -50,6 +50,13 @@ The `index.html` file demonstrates how to request notification permissions and d
 - **Notifications Not Showing**: Ensure that `firebase-messaging-sw.js` is correctly registered and accessible from your Firebase project settings.
 - **Service Worker Errors**: Verify that `firebase-messaging-sw.js` is correctly imported and has no syntax errors.
 
+
+### Note
+You will need to allow the browser to show the notification on your machine in the setting.
+
+
+Feel free to adjust the README according to your specific project needs and any additional information you may have.
+
 ### Example of Notification Handling
 
 ```javascript
@@ -73,10 +80,3 @@ https://firebase.google.com/docs/cloud-messaging
 
 Alertify.js
 https://alertifyjs.com/
-
-### Note
-You will need to allow the browser to show the notification on your machine in the setting.
-
-
-
-Feel free to adjust the README according to your specific project needs and any additional information you may have.

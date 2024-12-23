@@ -3,13 +3,7 @@ importScripts('https://www.gstatic.com/firebasejs/10.13.0/firebase-messaging-com
 
 // Initialize Firebase with your configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDNp8jIFQuVEgTz0_FQwAK9R77VuGp8T54",
-    authDomain: "fcm-ui-d2d96.firebaseapp.com",
-    projectId: "fcm-ui-d2d96",
-    storageBucket: "fcm-ui-d2d96.appspot.com",
-    messagingSenderId: "142896678357",
-    appId: "1:142896678357:web:09895b33ec7dfc04fea95c",
-    measurementId: "G-5H9E7PD3V5"
+    //here is the config 
 };
 firebase.initializeApp(firebaseConfig);
 
